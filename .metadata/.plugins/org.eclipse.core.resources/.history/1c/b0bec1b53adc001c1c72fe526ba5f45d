@@ -1,0 +1,23 @@
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class Agenda {
+
+	String fichero;
+	ArrayList<Contacto> contactos = new ArrayList<Contacto>();
+	public Agenda(String fichero) {
+		this.fichero=fichero;
+		
+		
+	}
+	
+	public ArrayList<Contacto> leeFichero(String fichero) {
+		try {
+			return Fichero.leer(fichero);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+}

@@ -1,0 +1,12 @@
+import java.io.Serializable;
+
+public class Mujer extends Contacto implements Serializable{
+
+	int hijos;
+	
+	public Mujer(String nombre, String apellidos) {
+		super(nombre, apellidos);
+		
+	}
+
+}

@@ -1,0 +1,147 @@
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.TreeSet;
+
+public class Agenda {
+
+	String fichero;
+	ArrayList<Contacto> contactos = new ArrayList<Contacto>();
+	
+	public Agenda(String fichero) {
+		this.fichero=fichero;
+		if(leeFichero(fichero)) {
+			for(Contacto x: contactos){
+				System.out.println(x.nombre);
+			}
+		}
+		
+	}
+	
+	public boolean leeFichero(String fichero) {
+		try {
+			return contactos.addAll(Fichero.leer(fichero));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public void escribeFichero(String fichero, ArrayList<Contacto> contactos) {
+		
+		try {
+			Fichero.escribir(fichero, contactos);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public boolean existeContacto(String nombre, String apellidos) {
+		boolean existe;
+		for(Contacto x:contactos) {
+			if(x.nombre.equals(nombre) && x.apellidos.equals(apellidos)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * añade contactos
+	 * @param nombre
+	 * @param apellidos
+	 * @return true si añade el contacto, false si ya existe
+	 */
+	public boolean añadeContacto(String nombre, String apellidos) {
+		boolean hecho=false;
+		if(!existeContacto(nombre, apellidos)) {
+			contactos.add(new Contacto(nombre,apellidos));
+			hecho=true;
+		}else System.out.println("Ya existe un contacto con ese nombre");
+		return hecho;
+
+	}
+
+	/**
+	 * borra contactos
+	 * @param nombre
+	 * @param apellidos
+	 * @return true si ha borrado el contacto
+	 */
+	public boolean borrarContacto(String nombre, String apellidos) {
+		
+		boolean borrado=false;
+		if(existeContacto(nombre,apellidos)) {
+			Iterator<Contacto> it = contactos.iterator();
+			
+			while(it.hasNext() && borrado==false) {
+				Contacto x = it.next();
+				if(nombre.equals(x.nombre) && apellidos.equals(x.apellidos)) {
+					contactos.remove(x);
+					borrado=true;
+					return borrado;
+				}
+			}
+		}
+		return borrado;
+	}
+	
+	public void ordenaAlf() {
+
+		//No lo hago con comparable porqe me da error, lo hago con un treeset		
+		TreeSet<Contacto> ordenado = new TreeSet<Contacto>();
+		for(Contacto x:contactos) {
+			ordenado.add(x);
+		}
+		for(Contacto x: ordenado) {
+			System.out.println(x.nombre+" "+x.apellidos);
+		}
+
+	}
+	
+	public String buscarNombre(String nombre, String apellidos) {
+		String salida="";
+		if(existeContacto(nombre,apellidos)) {
+			for(Contacto x:contactos) {
+				if((nombre.equals(x.nombre) && apellidos.equals(x.apellidos) && !x.numeros.isEmpty())) {
+					for(Numero y: x.numeros) {
+						salida+=y.telefono+" "+y.tipo+"\r";
+					}
+				}
+			}return salida;
+		}else return salida+="No tiene numeros asociados";
+	}
+	
+	public boolean añadirTelefono(String nombre,String apellidos, String telefono,String tipotelefono) {
+		boolean añadido=false;
+		if(existeContacto(nombre, apellidos)) {
+			if(Numero.validaNumero(telefono)) {
+				for(Contacto x: contactos) {
+					if(nombre.equals(x.nombre) && apellidos.equals(x.apellidos)) {
+						x.numeros.add(new Numero(telefono, tipotelefono));
+						añadido=true;
+					}
+				}
+			}
+		}return añadido;
+	}
+
+	public String buscaTelefono(String telefono) {
+		String salida="";
+		for(Contacto x: contactos) {
+			for(Numero y: x.numeros) {
+				if(y.telefono.equals(telefono)) {
+					salida+="Nombre: "+x.nombre+"Apellidos: "+x.apellidos;
+				}
+			}
+		}
+		return salida;
+	}
+
+	
+
+}

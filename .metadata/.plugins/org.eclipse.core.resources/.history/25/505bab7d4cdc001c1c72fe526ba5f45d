@@ -1,0 +1,11 @@
+import java.io.Serializable;
+
+public class Hombre extends Contacto implements Serializable{
+
+	boolean barba;
+	public Hombre(String nombre, String apellidos, int opcion) {
+		super(nombre, apellidos);
+		
+	}
+
+}

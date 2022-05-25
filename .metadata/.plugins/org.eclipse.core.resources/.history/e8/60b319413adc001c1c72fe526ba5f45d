@@ -1,0 +1,17 @@
+import java.util.ArrayList;
+
+public class Agenda {
+
+	String fichero;
+	
+	public Agenda(String fichero) {
+		this.fichero=fichero;
+		
+		
+	}
+	
+	public ArrayList<Contacto> leeFichero(String fichero) {
+		return Fichero.leer(fichero);
+		
+	}
+}

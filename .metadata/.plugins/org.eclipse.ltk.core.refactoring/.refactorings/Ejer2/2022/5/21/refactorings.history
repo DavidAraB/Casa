@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Extract method &apos;private void asignarSexo()&apos; from &apos;Menu.trabajo(...)&apos; to &apos;Menu&apos;&#x0D;&#x0A;- Original project: &apos;Ejer2&apos;&#x0D;&#x0A;- Method name: &apos;asignarSexo&apos;&#x0D;&#x0A;- Destination type: &apos;Menu&apos;&#x0D;&#x0A;- Declared visibility: &apos;private&apos;" comments="false" description="Extract method &apos;asignarSexo&apos;" destination="0" exceptions="false" flags="786434" id="org.eclipse.jdt.ui.extract.method" input="/src&lt;{Menu.java" name="asignarSexo" replace="false" selection="2747 358" stamp="1653500891494" version="1.0" visibility="2"/>
+</session>
